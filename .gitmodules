@@ -1,0 +1,3 @@
+[submodule "b-protos"]
+	path = b-protos
+	url = git@github.com:husanmusa/b-protos.git
