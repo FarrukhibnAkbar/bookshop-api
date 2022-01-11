@@ -1,6 +1,6 @@
 package services
 
-import(
+import (
 	"fmt"
 
 	"google.golang.org/grpc"
@@ -8,7 +8,7 @@ import(
 	"google.golang.org/grpc/resolver"
 
 	"github.com/FarrukhibnAkbar/bookshop-api/config"
-	pb "github.com/FarrukhibnAkbar/bookshop-api/genproto"
+	pb "github.com/FarrukhibnAkbar/bookshop-api/genproto/catalog_service"
 )
 
 type IServiceManager interface {
@@ -27,7 +27,7 @@ func NewServiceManager(conf *config.Config) (IServiceManager, error) {
 	resolver.SetDefaultScheme("dns")
 
 	connCatalog, err := grpc.Dial(
-		fmt.Sprintf("%s:%d", conf.CatalogServiceHost, conf.CatalogServicePort)
+		fmt.Sprintf("%s:%d", conf.CatalogServiceHost, conf.CatalogServicePort),
 		grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -38,5 +38,5 @@ func NewServiceManager(conf *config.Config) (IServiceManager, error) {
 	}
 
 	return serviceManager, nil
-	
+
 }

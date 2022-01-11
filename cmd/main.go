@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
 	"github.com/FarrukhibnAkbar/bookshop-api/api"
 	"github.com/FarrukhibnAkbar/bookshop-api/config"
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/logger"
@@ -17,9 +17,9 @@ func main() {
 	}
 
 	server := api.New(api.Option{
-		Conf:			cfg,
-		Logger: 		log,
-		serviceManager:	serviceManager,
+		Conf:           cfg,
+		Logger:         log,
+		ServiceManager: serviceManager,
 	})
 
 	if err := server.Run(cfg.HTTPPort); err != nil {
