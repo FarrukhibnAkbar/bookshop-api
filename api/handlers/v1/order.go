@@ -20,7 +20,7 @@ import (
 // @Tags order
 // @Accept  json
 // @Produce  json
-// @Param order request body models.order true "orderCreateRequest"
+// @Param order request body models.Order true "orderCreateRequest"
 // @Success 200 {object} models.Order
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
@@ -181,7 +181,7 @@ func (h *handlerV1) UpdateOrder(c *gin.Context) {
 
 // DeleteOrder ...
 // @Summary Deleteorder
-// @Description This API for deleting order
+// @Description This API for deleting rder
 // @Tags order
 // @Accept  json
 // @Produce  json
