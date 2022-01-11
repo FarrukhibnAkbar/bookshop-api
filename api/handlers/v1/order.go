@@ -149,7 +149,7 @@ func (h *handlerV1) Listorders(c *gin.Context) {
 // @Router /v1/orders/{id} [put]
 func (h *handlerV1) UpdateOrder(c *gin.Context) {
 	var (
-		body        pb.order
+		body        pb.Order
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -198,7 +198,7 @@ func (h *handlerV1) DeleteOrder(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.orderService().Delete(
+	response, err := h.serviceManager.OrderService().Delete(
 		ctx, &pb.ByIdReq{
 			Id: guid,
 		})
