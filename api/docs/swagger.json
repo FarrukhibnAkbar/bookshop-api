@@ -76,7 +76,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Order"
+                            "$ref": "#/definitions/models.JustOrder"
                         }
                     }
                 ],
@@ -128,7 +128,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/models.UpdateOrder"
+                            "$ref": "#/definitions/models.Order"
                         }
                     },
                     "400": {
@@ -171,13 +171,16 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Order"
+                            "$ref": "#/definitions/models.JustOrder"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
                     },
                     "400": {
                         "description": "Bad Request",
@@ -243,6 +246,20 @@
                 }
             }
         },
+        "models.JustOrder": {
+            "type": "object",
+            "properties": {
+                "book_id": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Order": {
             "type": "object",
             "properties": {
@@ -268,20 +285,6 @@
             "properties": {
                 "error": {
                     "$ref": "#/definitions/models.Error"
-                }
-            }
-        },
-        "models.UpdateOrder": {
-            "type": "object",
-            "properties": {
-                "book_id": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
                 }
             }
         }

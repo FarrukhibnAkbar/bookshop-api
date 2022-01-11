@@ -20,7 +20,7 @@ import (
 // @Tags order
 // @Accept  json
 // @Produce  json
-// @Param order request body models.Order true "orderCreateRequest"
+// @Param order request body models.JustOrder true "orderCreateRequest"
 // @Success 200 {object} models.Order
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
@@ -62,7 +62,7 @@ func (h *handlerV1) CreateOrder(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "ID"
-// @Success 200 {object} models.UpdateOrder
+// @Success 200 {object} models.Order
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
 // @Router /v1/orders/{id} [get]
@@ -142,8 +142,8 @@ func (h *handlerV1) Listorders(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "ID"
-// @Param order request body models.Order true "orderUpdateRequest"
-// @Success 200
+// @Param order request body models.JustOrder true "orderUpdateRequest"
+// @Success 200 {object} models.Order
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
 // @Router /v1/orders/{id} [put]

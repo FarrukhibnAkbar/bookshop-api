@@ -4,6 +4,15 @@ definitions:
       message:
         type: string
     type: object
+  models.JustOrder:
+    properties:
+      book_id:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+    type: object
   models.Order:
     properties:
       book_id:
@@ -21,15 +30,6 @@ definitions:
     properties:
       error:
         $ref: '#/definitions/models.Error'
-    type: object
-  models.UpdateOrder:
-    properties:
-      book_id:
-        type: string
-      description:
-        type: string
-      id:
-        type: string
     type: object
 info:
   contact: {}
@@ -79,7 +79,7 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/models.Order'
+          $ref: '#/definitions/models.JustOrder'
       produces:
       - application/json
       responses:
@@ -141,7 +141,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/models.UpdateOrder'
+            $ref: '#/definitions/models.Order'
         "400":
           description: Bad Request
           schema:
@@ -168,12 +168,14 @@ paths:
         name: request
         required: true
         schema:
-          $ref: '#/definitions/models.Order'
+          $ref: '#/definitions/models.JustOrder'
       produces:
       - application/json
       responses:
         "200":
-          description: ""
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
         "400":
           description: Bad Request
           schema:

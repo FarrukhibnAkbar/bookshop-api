@@ -8,10 +8,11 @@ type Order struct {
 	UpdatedAt            string   `json:"updated_at"`
 }
 
+
 type ListOrders []Order
 
 
-type UpdateOrder struct {
+type JustOrder struct {
 	Id                   string   `json:"id"`
 	BookId               string   `json:"book_id"`
 	Description          string   `json:"description"`
