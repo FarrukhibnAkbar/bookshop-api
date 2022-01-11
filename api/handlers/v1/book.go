@@ -127,7 +127,30 @@ func (h *handlerV1) UpdateBook(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to update task", l.Error(err))
+		h.log.Error("failed to update book", l.Error(err))
+		return
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *handlerV1) DeleteBook(c *gin.Context) {
+	var jspbMarshal protojson.MarshalOptions
+	jspbMarshal.UseProtoNames = true
+
+	guid := c.Param("id")
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
+	defer cancel()
+
+	response, err := h.serviceManager.CatalogService().BookDelete(
+		ctx, &pb.ByIdReq{
+			Id: guid,
+		})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		h.log.Error("failed to delete book", l.Error(err))
 		return
 	}
 
