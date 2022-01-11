@@ -13,9 +13,9 @@ import (
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/utils"
 )
 
-func (h *handlerV1) CreateAuthor(c *gin.Context) {
+func (h *handlerV1) CreateBook(c *gin.Context) {
 	var (
-		body        pb.Author
+		body        pb.Book
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -32,12 +32,12 @@ func (h *handlerV1) CreateAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorCreate(ctx, &body)
+	response, err := h.serviceManager.CatalogService().BookCreate(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to create author", l.Error(err))
+		h.log.Error("failed to create book", l.Error(err))
 		return
 	}
 
@@ -45,7 +45,7 @@ func (h *handlerV1) CreateAuthor(c *gin.Context) {
 
 }
 
-func (h *handlerV1) GetAuthor(c *gin.Context) {
+func (h *handlerV1) GetBook(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
@@ -53,7 +53,7 @@ func (h *handlerV1) GetAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorGet(
+	response, err := h.serviceManager.CatalogService().BookGet(
 		ctx, &pb.ByIdReq{
 			Id: guid,
 		})
@@ -61,14 +61,14 @@ func (h *handlerV1) GetAuthor(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to get author", l.Error(err))
+		h.log.Error("failed to get book", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *handlerV1) ListAuthors(c *gin.Context) {
+func (h *handlerV1) ListBooks(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
 	params, errStr := utils.ParseQueryParams(queryParams)
@@ -86,8 +86,8 @@ func (h *handlerV1) ListAuthors(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorList(
-		ctx, &pb.ListReq{
+	response, err := h.serviceManager.CatalogService().BookList(
+		ctx, &pb.ListReq{ // litsbookreq qilasan
 			Limit: params.Limit,
 			Page:  params.Page,
 		})
@@ -102,9 +102,9 @@ func (h *handlerV1) ListAuthors(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *handlerV1) UpdateAuthor(c *gin.Context) {
+func (h *handlerV1) UpdateBook(c *gin.Context) {
 	var (
-		body        pb.Author
+		body        pb.Book
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -122,35 +122,12 @@ func (h *handlerV1) UpdateAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorUpdate(ctx, &body)
+	response, err := h.serviceManager.CatalogService().BookUpdate(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to update author", l.Error(err))
-		return
-	}
-
-	c.JSON(http.StatusOK, response)
-}
-
-func (h *handlerV1) DeleteAuthor(c *gin.Context) {
-	var jspbMarshal protojson.MarshalOptions
-	jspbMarshal.UseProtoNames = true
-
-	guid := c.Param("id")
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
-	defer cancel()
-
-	response, err := h.serviceManager.CatalogService().AuthorDelete(
-		ctx, &pb.ByIdReq{
-			Id: guid,
-		})
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"error": err.Error(),
-		})
-		h.log.Error("failed to delete author", l.Error(err))
+		h.log.Error("failed to update task", l.Error(err))
 		return
 	}
 

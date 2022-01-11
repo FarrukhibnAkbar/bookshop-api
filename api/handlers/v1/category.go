@@ -13,9 +13,9 @@ import (
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/utils"
 )
 
-func (h *handlerV1) CreateAuthor(c *gin.Context) {
+func (h *handlerV1) CreateCategory(c *gin.Context) {
 	var (
-		body        pb.Author
+		body        pb.Category
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -32,12 +32,12 @@ func (h *handlerV1) CreateAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorCreate(ctx, &body)
+	response, err := h.serviceManager.CatalogService().CategoryCreate(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to create author", l.Error(err))
+		h.log.Error("failed to create category", l.Error(err))
 		return
 	}
 
@@ -45,7 +45,7 @@ func (h *handlerV1) CreateAuthor(c *gin.Context) {
 
 }
 
-func (h *handlerV1) GetAuthor(c *gin.Context) {
+func (h *handlerV1) GetCategory(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
@@ -53,7 +53,7 @@ func (h *handlerV1) GetAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorGet(
+	response, err := h.serviceManager.CatalogService().CategoryGet(
 		ctx, &pb.ByIdReq{
 			Id: guid,
 		})
@@ -61,14 +61,14 @@ func (h *handlerV1) GetAuthor(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to get author", l.Error(err))
+		h.log.Error("failed to get category", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *handlerV1) ListAuthors(c *gin.Context) {
+func (h *handlerV1) ListCategories(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
 	params, errStr := utils.ParseQueryParams(queryParams)
@@ -86,7 +86,7 @@ func (h *handlerV1) ListAuthors(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorList(
+	response, err := h.serviceManager.CatalogService().CategoryList(
 		ctx, &pb.ListReq{
 			Limit: params.Limit,
 			Page:  params.Page,
@@ -95,16 +95,16 @@ func (h *handlerV1) ListAuthors(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to list tasks", l.Error(err))
+		h.log.Error("failed to list categories", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *handlerV1) UpdateAuthor(c *gin.Context) {
+func (h *handlerV1) UpdateCategory(c *gin.Context) {
 	var (
-		body        pb.Author
+		body        pb.Category
 		jspbMarshal protojson.MarshalOptions
 	)
 	jspbMarshal.UseProtoNames = true
@@ -122,19 +122,19 @@ func (h *handlerV1) UpdateAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorUpdate(ctx, &body)
+	response, err := h.serviceManager.CatalogService().CategoryUpdate(ctx, &body)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to update author", l.Error(err))
+		h.log.Error("failed to update category", l.Error(err))
 		return
 	}
 
 	c.JSON(http.StatusOK, response)
 }
 
-func (h *handlerV1) DeleteAuthor(c *gin.Context) {
+func (h *handlerV1) DeleteCategory(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
 
@@ -142,7 +142,7 @@ func (h *handlerV1) DeleteAuthor(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
-	response, err := h.serviceManager.CatalogService().AuthorDelete(
+	response, err := h.serviceManager.CatalogService().CategoryDelete(
 		ctx, &pb.ByIdReq{
 			Id: guid,
 		})
@@ -150,7 +150,7 @@ func (h *handlerV1) DeleteAuthor(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-		h.log.Error("failed to delete author", l.Error(err))
+		h.log.Error("failed to delete category", l.Error(err))
 		return
 	}
 
