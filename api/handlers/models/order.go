@@ -9,3 +9,10 @@ type Order struct {
 }
 
 type ListOrders []Order
+
+
+type UpdateOrder struct {
+	Id                   string   `json:"id"`
+	BookId               string   `json:"book_id"`
+	Description          string   `json:"description"`
+}

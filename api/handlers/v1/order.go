@@ -9,7 +9,7 @@ import (
 	"google.golang.org/protobuf/encoding/protojson"
 
 	_ "github.com/FarrukhibnAkbar/bookshop-api/api/handlers/models"
-	pb "github.com/FarrukhibnAkbar/bookshop-api/genproto"
+	pb "github.com/FarrukhibnAkbar/bookshop-api/genproto/order_service"
 	l "github.com/FarrukhibnAkbar/bookshop-api/pkg/logger"
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/utils"
 )
@@ -62,7 +62,7 @@ func (h *handlerV1) CreateOrder(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param id path string true "ID"
-// @Success 200 {object} models.Order
+// @Success 200 {object} models.UpdateOrder
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
 // @Router /v1/orders/{id} [get]
