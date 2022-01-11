@@ -6,6 +6,8 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/golang/protobuf v1.5.2
 	github.com/spf13/cast v1.4.1
+	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2
+	github.com/swaggo/gin-swagger v1.3.3
 	github.com/swaggo/swag v1.7.8
 	go.uber.org/zap v1.20.0
 	google.golang.org/grpc v1.43.0
@@ -16,7 +18,6 @@ require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.19.6 // indirect

@@ -2,7 +2,10 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
+	_ "github.com/FarrukhibnAkbar/bookshop-api/api/docs" // swag
 	v1 "github.com/FarrukhibnAkbar/bookshop-api/api/handlers/v1"
 	"github.com/FarrukhibnAkbar/bookshop-api/config"
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/logger"
@@ -44,10 +47,15 @@ func New(option Option) *gin.Engine {
 	// api.DELETE("/categories/{id}", handlerV1.DeleteCategory)
 
 	api.POST("/orders", handlerV1.CreateOrder)
-	api.GET("/orders/{id}", handlerV1.GetOrder)
+	api.GET("/orders/:id", handlerV1.GetOrder)
 	api.GET("/orders", handlerV1.Listorders)
-	api.PUT("/orders/{id}", handlerV1.UpdateOrder)
-	api.DELETE("/orders/{id}", handlerV1.DeleteOrder)
+	api.PUT("/orders/:id", handlerV1.UpdateOrder)
+	api.DELETE("/orders/:id", handlerV1.DeleteOrder)
+
+
+	url := ginSwagger.URL("swagger/doc.json") // The url pointing to API definition
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+
 
 	return router
 }
