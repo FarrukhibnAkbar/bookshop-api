@@ -1,19 +1,17 @@
 package models
 
 type Order struct {
-	Id                   string   `json:"id"`
-	BookId               string   `json:"book_id"`
-	Description          string   `json:"description"`
-	CreatedAt            string   `json:"created_at"`
-	UpdatedAt            string   `json:"updated_at"`
+	Id          string `json:"id"`
+	BookId      string `json:"book_id"`
+	Description string `json:"description"`
+	CreatedAt   string `json:"created_at"`
+	UpdatedAt   string `json:"updated_at"`
 }
-
 
 type ListOrders []Order
 
-
 type JustOrder struct {
-	Id                   string   `json:"id"`
-	BookId               string   `json:"book_id"`
-	Description          string   `json:"description"`
+	Id          string `json:"id"`
+	BookId      string `json:"book_id"`
+	Description string `json:"description"`
 }

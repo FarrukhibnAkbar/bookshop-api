@@ -28,34 +28,32 @@ func New(option Option) *gin.Engine {
 	})
 
 	api := router.Group("v1")
-	// api.POST("/auhtors", handlerV1.CreateAuthor)
-	// api.GET("/authors/{id}", handlerV1.GetAuthor)
-	// api.GET("/authors", handlerV1.ListAuthors)
-	// api.PUT("/authors/{id}", handlerV1.UpdateAuthor)
-	// api.DELETE("/authors/{id}", handlerV1.DeleteAuthor)
+	api.POST("/authors", handlerV1.CreateAuthor)
+	api.GET("/authors/", handlerV1.GetAuthor)
+	api.GET("/authors", handlerV1.ListAuthors)
+	api.PUT("/authors/:id", handlerV1.UpdateAuthor)
+	api.DELETE("/authors/:id", handlerV1.DeleteAuthor)
 
-	// api.POST("/books", handlerV1.CreateBook)
-	// api.GET("/books/{id}", handlerV1.GetBook)
-	// api.GET("/books", handlerV1.ListBooks)
-	// api.PUT("/books/{id}", handlerV1.UpdateBook)
-	// api.DELETE("/books/{id}", handlerV1.DeleteBook)
+	api.POST("/books", handlerV1.CreateBook)
+	api.GET("/books/{id}", handlerV1.GetBook)
+	api.GET("/books", handlerV1.ListBooks)
+	api.PUT("/books/{id}", handlerV1.UpdateBook)
+	api.DELETE("/books/{id}", handlerV1.DeleteBook)
 
-	// api.POST("/categories", handlerV1.CreateCategory)
-	// api.GET("/categories/{id}", handlerV1.GetCategory)
-	// api.GET("/categories", handlerV1.ListCategories)
-	// api.PUT("/categories/{id}", handlerV1.UpdateCategory)
-	// api.DELETE("/categories/{id}", handlerV1.DeleteCategory)
+	api.POST("/categories", handlerV1.CreateCategory)
+	api.GET("/categories/}", handlerV1.GetCategory)
+	api.GET("/categories", handlerV1.ListCategories)
+	api.PUT("/categories/:id", handlerV1.UpdateCategory)
+	api.DELETE("/categories/:id", handlerV1.DeleteCategory)
 
 	api.POST("/orders", handlerV1.CreateOrder)
-	api.GET("/orders/:id", handlerV1.GetOrder)
-	api.GET("/orders", handlerV1.Listorders)
+	api.GET("/orders/", handlerV1.GetOrder)
+	api.GET("/orders", handlerV1.ListOrders)
 	api.PUT("/orders/:id", handlerV1.UpdateOrder)
 	api.DELETE("/orders/:id", handlerV1.DeleteOrder)
 
-
 	url := ginSwagger.URL("swagger/doc.json") // The url pointing to API definition
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
-
 
 	return router
 }

@@ -13,6 +13,17 @@ import (
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/utils"
 )
 
+// CreateAuthor ...
+// @Summary CreateAuthor
+// @Description This API for creating a new author
+// @Tags author
+// @Accept  json
+// @Produce  json
+// @Param order request body models.AuthorCU true "AuthorCreateRequest"
+// @Success 200 {object} models.Author
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/authors/ [post]
 func (h *handlerV1) CreateAuthor(c *gin.Context) {
 	var (
 		body        pb.Author
@@ -45,6 +56,17 @@ func (h *handlerV1) CreateAuthor(c *gin.Context) {
 
 }
 
+// GetAuthor ...
+// @Summary GetAuthor
+// @Description This API for getting author detail
+// @Tags author
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {object} models.Author
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/authors/{id} [get]
 func (h *handlerV1) GetAuthor(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
@@ -68,6 +90,18 @@ func (h *handlerV1) GetAuthor(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// ListAuthors ...
+// @Summary ListAuthors
+// @Description This API for getting list of authors
+// @Tags author
+// @Accept  json
+// @Produce  json
+// @Param page query string false "Page"
+// @Param limit query string false "Limit"
+// @Success 200 {object} models.ListAuthors
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/authors/ [get]
 func (h *handlerV1) ListAuthors(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
@@ -102,6 +136,18 @@ func (h *handlerV1) ListAuthors(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// UpdateAuthor ...
+// @Summary UpdateAuthor
+// @Description This API for updating author
+// @Tags author
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param order request body models.AuthorCU true "authorUpdateRequest"
+// @Success 200 {object} models.Book
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/authors/{id} [put]
 func (h *handlerV1) UpdateAuthor(c *gin.Context) {
 	var (
 		body        pb.Author
@@ -134,6 +180,17 @@ func (h *handlerV1) UpdateAuthor(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// DeleteAuthor ...
+// @Summary DeleteAuthor
+// @Description This API for deleting author
+// @Tags author
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/authors/{id} [delete]
 func (h *handlerV1) DeleteAuthor(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true

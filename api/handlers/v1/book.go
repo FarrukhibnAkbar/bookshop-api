@@ -13,6 +13,17 @@ import (
 	"github.com/FarrukhibnAkbar/bookshop-api/pkg/utils"
 )
 
+// CreateBook ...
+// @Summary CreateBook
+// @Description This API for creating a new book
+// @Tags book
+// @Accept  json
+// @Produce  json
+// @Param order request body models.BookCU true "BookCreateRequest"
+// @Success 200 {object} models.Book
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/books/ [post]
 func (h *handlerV1) CreateBook(c *gin.Context) {
 	var (
 		body        pb.Book
@@ -45,6 +56,17 @@ func (h *handlerV1) CreateBook(c *gin.Context) {
 
 }
 
+// GetBook ...
+// @Summary GetBook
+// @Description This API for getting book detail
+// @Tags book
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200 {object} models.Book
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/books/{id} [get]
 func (h *handlerV1) GetBook(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true
@@ -68,6 +90,20 @@ func (h *handlerV1) GetBook(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// ListBooks ...
+// @Summary ListBooks
+// @Description This API for getting list of books
+// @Tags book
+// @Accept  json
+// @Produce  json
+// @Param page query string false "Page"
+// @Param limit query string false "Limit"
+// @Param authors query string false "authors"
+// @Param categories query string false "categories"
+// @Success 200 {object} models.ListBooks
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/books/ [get]
 func (h *handlerV1) ListBooks(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
@@ -87,9 +123,10 @@ func (h *handlerV1) ListBooks(c *gin.Context) {
 	defer cancel()
 
 	response, err := h.serviceManager.CatalogService().BookList(
-		ctx, &pb.ListReq{ // litsbookreq qilasan
-			Limit: params.Limit,
-			Page:  params.Page,
+		ctx, &pb.ListBookReq{
+			Limit:   params.Limit,
+			Page:    params.Page,
+			Filters: params.Filters,
 		})
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -102,6 +139,18 @@ func (h *handlerV1) ListBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// UpdateBook ...
+// @Summary UpdateBook
+// @Description This API for updating book
+// @Tags book
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Param order request body models.BookCU true "bookUpdateRequest"
+// @Success 200 {object} models.Book
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/books/{id} [put]
 func (h *handlerV1) UpdateBook(c *gin.Context) {
 	var (
 		body        pb.Book
@@ -134,6 +183,17 @@ func (h *handlerV1) UpdateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, response)
 }
 
+// DeleteBook ...
+// @Summary DeleteBook
+// @Description This API for deleting book
+// @Tags book
+// @Accept  json
+// @Produce  json
+// @Param id path string true "ID"
+// @Success 200
+// @Failure 400 {object} models.StandardErrorModel
+// @Failure 500 {object} models.StandardErrorModel
+// @Router /v1/books/{id} [delete]
 func (h *handlerV1) DeleteBook(c *gin.Context) {
 	var jspbMarshal protojson.MarshalOptions
 	jspbMarshal.UseProtoNames = true

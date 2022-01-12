@@ -56,7 +56,7 @@ func (h *handlerV1) CreateOrder(c *gin.Context) {
 }
 
 // GetOrder ...
-// @Summary Getorder
+// @Summary GetOrder
 // @Description This API for getting order detail
 // @Tags order
 // @Accept  json
@@ -90,7 +90,7 @@ func (h *handlerV1) GetOrder(c *gin.Context) {
 }
 
 // ListOrders ...
-// @Summary Listorders
+// @Summary ListOrders
 // @Description This API for getting list of orders
 // @Tags order
 // @Accept  json
@@ -100,8 +100,8 @@ func (h *handlerV1) GetOrder(c *gin.Context) {
 // @Success 200 {object} models.ListOrders
 // @Failure 400 {object} models.StandardErrorModel
 // @Failure 500 {object} models.StandardErrorModel
-// @Router /v1/orders [get]
-func (h *handlerV1) Listorders(c *gin.Context) {
+// @Router /v1/orders/ [get]
+func (h *handlerV1) ListOrders(c *gin.Context) {
 	queryParams := c.Request.URL.Query()
 
 	params, errStr := utils.ParseQueryParams(queryParams)
@@ -136,7 +136,7 @@ func (h *handlerV1) Listorders(c *gin.Context) {
 }
 
 // UpdateOrder ...
-// @Summary Updateorder
+// @Summary UpdateOrder
 // @Description This API for updating order
 // @Tags order
 // @Accept  json
@@ -163,7 +163,7 @@ func (h *handlerV1) UpdateOrder(c *gin.Context) {
 		return
 	}
 	body.Id = c.Param("id")
- 
+
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*time.Duration(h.cfg.CtxTimeout))
 	defer cancel()
 
@@ -180,8 +180,8 @@ func (h *handlerV1) UpdateOrder(c *gin.Context) {
 }
 
 // DeleteOrder ...
-// @Summary Deleteorder
-// @Description This API for deleting rder
+// @Summary DeleteOrder
+// @Description This API for deleting order
 // @Tags order
 // @Accept  json
 // @Produce  json
